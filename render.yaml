@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: ws-servicios
+    runtime: node
+    plan: starter
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /healthz
+    disk:
+      name: ws-servicios-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: ADMIN_TOKEN
+        generateValue: true
+      - key: SOLICITUDES_FILE
+        value: /var/data/solicitudes.json
